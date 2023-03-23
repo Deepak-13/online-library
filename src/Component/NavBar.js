@@ -20,7 +20,7 @@ function NavBar({ user }, { status }) {
   const logOut = () => {
     store.dispatch({ type: Cartaction.RESET_CART });
     store.dispatch({ type: Statusaction.RESET_STATUS });
-    store.dispatch({type:actionTypes.RESET_COMP});
+    store.dispatch({type: actionTypes.RESET_COMP});
     store.dispatch({ type: "logOut" });
     console.log("Successfully logged out");
   };

@@ -64,6 +64,26 @@ const CompletedProduct = ({ item, user }) => {
         item: item,
       },
     };
+    axios.get(`http://localhost:3000/users?username=${user.username}`)
+      .then((res) => {
+        console.log("retrived");
+        const user = res.data[0];
+        const data = {
+          ...user,
+          completed: user.fav.filter((compItem) => compItem.id !== item.id),
+        };
+        axios
+          .patch(`http://localhost:3000/users/${user.id}`, data)
+          .then((res) => {
+            console.log("comp updated");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // Deleting an item from cart in state
     store.dispatch(action);
     console.log("deleted a book in cart");
